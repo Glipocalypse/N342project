@@ -1,0 +1,286 @@
+/* CSS File: pacific.css */
+
+/*///////////////////////////////////
+//
+// Section 1: Global Elements
+// This affects all the elements with the below properties that do not have an in-line or embedded css
+//
+///////////////////////////////////*/
+
+body
+{
+	margin: 0 auto;
+	width: 80%;
+	background-color: #191919;  /* Background color */
+	color: #666666;   /* Text Color */
+	font-family: Arial;
+}
+
+header
+{
+	background-color: #8C8C8C; /* Background color */
+	background-position: left;
+	background-repeat: no-repeat; /* Prevents image repeat */
+	color: #FFFFFF;    /* Text Color */
+	height: 90px;
+}
+
+header img
+{
+	margin-left: 5px;
+}
+
+nav
+{
+	margin-top: 20px;
+	margin-left: 10px;
+	font-weight: bold;
+	float: left;
+	width: 160px;
+}
+
+nav ul
+{
+	list-style-type: none;
+	list-style-image: none;  /* This is needed to remove the image from the ul */
+	margin: 0;
+	padding-left: 0px;
+	font-size: 1.2em;
+	
+}
+
+nav li
+{
+	/*    */
+}
+
+nav a
+{
+	text-decoration: none;
+	font-size: 90%;
+}
+
+nav a:link
+{
+	color: #B2B2B2;
+}
+
+nav a:visited
+{
+	color: #003366;
+}
+
+nav a:hover
+{
+	color: #009933;
+}
+
+h1
+{
+	margin-bottom: 0;  /* Set Bottom Margin Spacing*/
+	font-family: Georgia, Times New Roman, Serif;
+}
+
+h2
+{
+	color: #090909;    /* Text Color */
+	font-family: Georgia, Times New Roman, Serif;
+	text-shadow: 1px 1px 1px #ccc;
+}
+
+h3
+{
+	color: #090909;  /* Text Color*/
+	font-family: Georgia, Times New Roman, Serif;
+	margin-left: 10px;
+}
+
+h4
+{
+	color: #090909;  /* Text Color*/
+	font-family: Georgia, Times New Roman, Serif;
+	margin-left: 10px;
+	text-align: center;
+}
+
+p
+{
+	margin-left: 20px;
+}
+
+dt
+{
+	color: #000033;    /* Text Color */
+}
+
+
+footer
+{
+	padding: 20px;
+	font-size: 75%;
+	font-style: italic;
+	font-family: Georgia, Times New Roman, Times, Serif;
+	margin-left: 190px;
+	background-color: #FFFFFF;
+	text-align: center;
+}
+
+table
+{
+	border: 1px solid #191919;
+	margin: 0 auto;
+	width: 100%;
+	border-spacing: 0;
+	color: 
+}
+
+td
+{
+	border: 1px solid #191919;
+	text-align: center;
+	min-height: 125px;
+	min-width: 75px;
+	vertical-align: top;
+	color: #003366;
+}
+
+th
+{
+	padding: 5px;
+	border: 1px solid #191919;
+	text-align: center;
+	background-color: #8C8C8C;
+	color: #000000;
+}
+
+tr
+{
+	background-color: #ffffff;
+}
+
+form
+{
+	background-color: #D1D1D1;
+}
+
+label
+{
+	margin-left: 15px;
+	text-align: right;
+	min-width: 120px;
+	color: #000000;
+}
+
+input 
+{
+	width: 200px;
+}
+
+textarea
+{
+	margin-left: 20px;
+	display: block;
+}
+
+button
+{
+	margin: 0 auto;
+}
+
+
+/*///////////////////////////////////
+//
+// Section 2: User Created Classes
+// This affects all class elements with the below properties that do not have an in-line or embedded css
+//
+///////////////////////////////////*/
+
+.day
+{
+	text-align:left;
+	color: #000000;
+}
+
+.eventInsp
+{
+	margin-top: 5px;
+	background-color: #003366;
+	border: 1px solid #191919;
+	border-radius: 15px;
+	color: #ffffff;
+}
+
+.eventAppr
+{
+	margin-top: 5px;
+	background-color: #009933;
+	border: 1px solid #191919;
+	border-radius: 15px;
+	color: #ffffff;
+}
+
+/*///////////////////////////////////
+//
+// Section 2: User Created Ids
+// This affects all id elements with the below properties that do not have an in-line or embedded css
+//
+///////////////////////////////////*/
+
+#wrapper
+{
+	width: 80%;
+	background-color: #161616;
+	min-width: 960px;
+	box-shadow: 5px 5px 5px #101010;
+}
+
+#content
+{
+	padding-top: 1px;
+	padding-left: 30px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	background-color: #FFFFFF;
+	margin-left: 190px;
+}
+
+#content ul
+{
+	list-style-position: inside;
+}
+
+#content img
+{
+	float: left;
+	padding-right: 20px;
+}
+
+#contact 
+{
+	font-size: 90%;
+}
+
+#calendar
+{
+	border: 5px solid #191919;
+	border-radius: 10px;
+	width: 100%;
+	height: 600px;	
+}
+
+#subButton
+{
+	margin-left: 30px;
+	padding-bottom:15px;
+}
+
+#title
+{
+	margin-left: 0px;
+}
+
+#orderManage
+{
+	text-align: center;
+	background-color: #D1D1D1;
+}
