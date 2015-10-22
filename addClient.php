@@ -139,6 +139,9 @@
 						<a href = \"employees.php\">Employee Management</a>
 					</li>";
 				?>
+				<li>
+					<a href = "employee.php">Employee Management</a>
+				</li>
 				
 				<li>
 					<a href = "index.php">Sign Out</a>
