@@ -285,6 +285,8 @@
                         //Company Password
                         $index = count($_SESSION['cPassword']); // should give us the next available index to use
                         $_SESSION['cPassword'][$index] = $newCPassword;
+
+						Header("Location: clients.php"); //where we go after we get this working
 					}
 					
 				}
