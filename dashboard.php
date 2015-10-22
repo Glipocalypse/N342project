@@ -29,6 +29,12 @@
 	<meta  charset="utf-8" />
 	<!-- This will house all the needed CSS and JavaScript -->
 	<link rel = "stylesheet" type = "text/css" href = "proto.css">
+	<link href='fullcalendar/fullcalendar.css' rel='stylesheet' />
+	<link href='fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+	<script src='fullcalendar/lib/moment.min.js'></script>
+	<script src='fullcalendar/lib/jquery.min.js'></script>
+	<script src='fullcalendar/fullcalendar.min.js'></script>
+	<script src = 'calendar.js'></script>
 	
 	<title>Aegis Appraisals Database:: Management Page</title>	
 </head>
@@ -64,6 +70,14 @@
 				?>
 				
 				<li>
+					<a href = "calendar.php">View Calendar</a>
+				</li>
+				
+				<li>
+					<a href = "stats.php">Company Statistics</a>
+				</li>
+				
+				<li>
 					<a href = "index.php">Sign Out</a>
 				</li>
 			</ul>
@@ -82,10 +96,42 @@
 			
 			<hr/>
 			
-			<h4>Events for the Week</h4>
+			<h4>Mobile Modules</h4>
 			
-			<iframe src="https://www.google.com/calendar/embed?mode=WEEK&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=djantoc%40gmail.com&amp;color=%2329527A&amp;ctz=America%2FNew_York" frameborder="0" scrolling="no" id = "calendar"></iframe>
+			<div id = "modulePanel">
+				<a href = "orders.php" class = "greenModule">
+					<img src = "orders.png" alt = "image failed to load" height = "70" width = "70">
+					<h5>Manage All Orders</h5>
+				</a>
+				
+				
+				<a href = "Client.php" class = "greenModule">
+					<img src = "clients.png" alt = "image failed to load" height = "70" width = "70">
+					<h5>Manage All Clients</h5>
+				</a>
+				
+				
+				<a href = "stats.php" class = "greenModule">
+					<img src = "stats.png" alt = "image failed to load" height = "70" width = "70">
+					<h5>View Statistics</h5>
+				</a>
+				
+				<a href = "calendar.php" class = "greenModule">
+					<img src = "calendar.png" alt = "image failed to load" height = "70" width = "70">
+					<h5>View Calendar</h5>
+				</a>
 			
+				
+				<a href = "employee.php" class = "greenModule">
+					<img src = "employee.png" alt = "image failed to load" height = "70" width = "70">
+					<h5>Manage Employees</h5>
+				</a>
+				
+				<a href = "index.php" class = "greenModule">
+					<img src = "signout.png" alt = "image failed to load" height = "70" width = "70">
+					<h5>Log out</h5>
+				</a>
+			</div>
 			
 		</div>
 		
