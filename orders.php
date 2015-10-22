@@ -62,6 +62,15 @@
 						<a href = \"employees.php\">Employee Management</a>
 					</li>";
 				?>
+				
+				<li>
+					<a href = "calendar.php">View Calendar</a>
+				</li>
+				
+				<li>
+					<a href = "stats.php">Company Statistics</a>
+				</li>
+				
 				<li>
 					<a href = "index.php">Sign Out</a>
 				</li>
@@ -70,18 +79,28 @@
 		
 		<div id = "content">
 			<h4>Events for the Month</h4>
+			<h2>Manage Orders</h2>
 			
-			<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=djantoc%40gmail.com&amp;color=%2329527A&amp;ctz=America%2FNew_York" frameborder="0" scrolling="no" id = "calendar"></iframe>
+			<div id = "modulePanel">
+				<a href = "addOrder.php" class = "greenModule">
+					<img src = "addOrders.png" alt = "image failed to load" height = "70" width = "70">
+					<h5>Add new Order</h5>
+				</a>
+			</div>
+			
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
 			
 			<hr/>
 			
-			<div id = "orderManage">
-				<button type = "button" onclick = "location.href='addOrder.php'">Add Order</button>
-	            <br><br>
-				<label id = "title">Manage Orders</label>
-			</div>	
-			
-			<br/>			
+			<h2>Active Orders</h2>	
 			
 			<table>
 				<tr>

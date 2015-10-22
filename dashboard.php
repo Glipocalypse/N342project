@@ -68,7 +68,7 @@
 						<a href = \"employees.php\">Employee Management</a>
 					</li>";
 				?>
-				
+				 
 				<li>
 					<a href = "calendar.php">View Calendar</a>
 				</li>
