@@ -144,6 +144,14 @@
 				</li>
 				
 				<li>
+					<a href = "calendar.php">View Calendar</a>
+				</li>
+				
+				<li>
+					<a href = "stats.php">Company Statistics</a>
+				</li>
+				
+				<li>
 					<a href = "index.php">Sign Out</a>
 				</li>
 			</ul>
