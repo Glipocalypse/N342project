@@ -1,88 +1,9 @@
 <?php
 	session_start();
-    if(!isset($_SESSION['username'])) {
-		header("Location: index.php");
-    }
-
-	if(!isset($_SESSION["Fname"]))
-	{
-		$fnameArray = array("Chris");
-		
-		$_SESSION["Fname"] = $fnameArray;
-	}
-	
-	if(!isset($_SESSION["Lname"]))
-	{
-		$lnameArray = array("Antolin");
-		
-		$_SESSION["Lname"] = $lnameArray;
-	}
-
-    if(!isset($_SESSION["EO"]))
-    {
-        $EOArray = array("No");
-
-        $_SESSION["EO"] = $EOArray;
-    }
-
-	if(!isset($_SESSION["email"]))
-	{
-		$emailArray = array("cantolin@iupui.edu");
-		
-		$_SESSION["email"] = $emailArray;
-	}
-	
-	if(!isset($_SESSION["phone"]))
-	{
-		$phoneArray = array("(765)465-1804");
-		
-		$_SESSION["phone"] = $phoneArray;
-	}
-	
-	if(!isset($_SESSION["contact"]))
-	{
-		$contactArray = array("Trinidad Antolin");
-		
-		$_SESSION["contact"] = $contactArray;
-	}
-	
-	if(!isset($_SESSION["cPhone"]))
-	{
-		$cPhoneArray = array("(765)465-0134");
-		
-		$_SESSION["cPhone"] = $cPhoneArray;
-	}
-	
-	if(!isset($_SESSION["website"]))
-	{
-		$websiteArray = array("cs.iupui.edu/~cantolin");
-		
-		$_SESSION["website"] = $websiteArray;
-	}
-	
-	if(!isset($_SESSION["notes"]))
-	{
-		$notesArray = array("test Entry");
-		
-		$_SESSION["notes"] = $notesArray;
-	}
-
-    if(!isset($_SESSION["cUsername"]))
-    {
-        $cUsernameArray = array("testUser");
-
-        $_SESSION["cUsername"] = $cUsernameArray;
-    }
-
-    if(!isset($_SESSION["cPassword"]))
-    {
-        $cPasswordArray = array("testPass");
-
-        $_SESSION["cPassword"] = $cPasswordArray;
-    }
 
 	require_once "util/function.php";
     require_once "dbconnect.php";
+
 ?>
 <!DOCTYPE html>
 
@@ -131,13 +52,17 @@
 					<a href = "clients.php">Client Management</a>
 				</li>
 				
-				<?php
-					if ($_SESSION["permissions"] == "Owner")
-						print "
-					<li>
-						<a href = \"employees.php\">Employee Management</a>
-					</li>";
-				?>
+				<li>
+					<a href = "employee.php">Employee Management</a>
+				</li>
+				
+				<li>
+					<a href = "calendar.php">View Calendar</a>
+				</li>
+				
+				<li>
+					<a href = "stats.php">Company Statistics</a>
+				</li>
 				
 				<li>
 					<a href = "index.php">Sign Out</a>
@@ -148,9 +73,12 @@
 		<div id = "content">	
 			
 			<h2>Add new Client</h2>
+		<div id = "content">			
+			<h2>Add new Order</h2>
 			
 			<?php
 				$error = "";
+			
 				//check if the form is made
 				if(isset($_POST['SubButton']))
 				{

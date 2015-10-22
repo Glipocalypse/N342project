@@ -86,9 +86,26 @@ require_once "dbconnect.php";
 
     <div id = "content">
 
-        <h3>Client List</h3>
-        <button type = "button" onclick = "location.href='addClient.php'">Add Client</button>
-        <br><br>
+        <h2>Manage Clients</h2>
+			
+		<div id = "modulePanel">
+			<a href = "addClient.php" class = "greenModule">
+				<img src = "addClient.png" alt = "image failed to load" height = "70" width = "70">
+				<h5>Add new Client</h5>
+			</a>
+		</div>
+		
+        <br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<hr/>
+		
+		<h3>Active Client List</h3>
         <table>
             <tr>
                 <th>

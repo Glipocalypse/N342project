@@ -61,6 +61,14 @@ $clientNum = $_GET["clientNum"];
 					<a href = \"employees.php\">Employee Management</a>
 				</li>";
 			?>
+			
+			<li>
+				<a href = "calendar.php">View Calendar</a>
+			</li>
+			
+			<li>
+				<a href = "stats.php">Company Statistics</a>
+			</li>
 
             <li>
                 <a href = "index.php">Sign Out</a>
@@ -198,7 +206,12 @@ $clientNum = $_GET["clientNum"];
 
         }
         ?>
-
+		<form method = "post" action = "deleteClient.php"><!--Edit the url here-->
+			<h3>If Client is to be deleted from records, click the button below</h3>
+			<input type = "submit" value = "Delete Client">
+		</form>
+		
+		
         <form method = "post" action = "">
             <?php
             print $error;
