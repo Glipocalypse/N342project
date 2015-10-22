@@ -11,32 +11,32 @@ body
 {
 	margin: 0 auto;
 	width: 80%;
-	background-color: #191919;  /* Background color */
+	background-image: url(background.gif);  /* Background image */
+	background-repeat: repeat;
 	color: #666666;   /* Text Color */
 	font-family: Arial;
 }
 
 header
 {
-	background-color: #8C8C8C; /* Background color */
+	padding-top: 10px;
+	background-color: #999999; /* Background color */
 	background-position: left;
 	background-repeat: no-repeat; /* Prevents image repeat */
 	color: #FFFFFF;    /* Text Color */
 	height: 90px;
+	border-bottom: 1px solid #000000;
 }
 
 header img
 {
-	margin-left: 5px;
+	margin-left: 10px;
 }
 
 nav
 {
-	margin-top: 20px;
-	margin-left: 10px;
-	font-weight: bold;
 	float: left;
-	width: 160px;
+	width: 190px;
 }
 
 nav ul
@@ -51,29 +51,34 @@ nav ul
 
 nav li
 {
-	/*    */
+	padding-top: 5px;
+	padding-left: 10px;
+	border-bottom: 1px solid #000000;
+}
+nav li:hover
+{
+	background-color: #6B6B6B;  /*    */
+	border-bottom: 1px solid #009933;
 }
 
 nav a
 {
+	padding-top: 5px;
+	padding-left: 2.5px;
 	text-decoration: none;
 	font-size: 90%;
 }
 
 nav a:link
 {
-	color: #B2B2B2;
+	color: #ffffff;
 }
 
 nav a:visited
 {
-	color: #003366;
+	color: #ffffff;
 }
 
-nav a:hover
-{
-	color: #009933;
-}
 
 h1
 {
@@ -123,6 +128,7 @@ footer
 	margin-left: 190px;
 	background-color: #FFFFFF;
 	text-align: center;
+	clear: both;
 }
 
 table
@@ -178,7 +184,7 @@ input
 
 textarea
 {
-	margin-left: 20px;
+	margin-left: 35px;
 	display: block;
 }
 
@@ -219,6 +225,88 @@ button
 	color: #ffffff;
 }
 
+.greenModule
+{
+	padding: 5px;
+	margin:10px 30px 10px 50px; /*top, right, bottom, left margins */
+	background-color: #009933;
+	color: #ffffff;
+	width: 40%;
+	min-height: 50px;
+	border-radius: 10px;
+	font-size: 125%;
+	float: left;
+	clear: right;
+	text-decoration: none;
+	color: #000000;
+}
+
+.greenModule:hover
+{
+	background-color: #003366;
+	color: #ffffff;
+	
+}
+
+.greenModule h5 /*Module headers */
+{
+	padding: 10px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.greenModule a:hover
+{
+	color: #ffffff;
+}
+
+.greenModule img
+{
+	padding: 10px;
+}
+
+.blueModule /* Stats Modules */
+{
+	padding: 5px;
+	margin:10px 30px 10px 50px; /*top, right, bottom, left margins */
+	background-color: #003366;
+	color: #ffffff;
+	width: 40%;
+	min-height: 50px;
+	border-radius: 10px;
+	font-size: 125%;
+	float: left;
+	clear: right;
+	text-decoration: none;
+	color: #000000;
+}
+
+.blueModule h4 
+{
+	font-size: 75%;
+}
+
+.blueModuleLong /* Long Stats Modules */
+{
+	padding: 5px;
+	margin:10px 30px 10px 50px; /*top, right, bottom, left margins */
+	background-color: #003366;
+	color: #ffffff;
+	width: 90%;
+	min-height: 50px;
+	border-radius: 10px;
+	font-size: 125%;
+	float: left;
+	clear: right;
+	text-decoration: none;
+	color: #000000;
+}
+
+.blueModuleLong h4 
+{
+	font-size: 75%;
+}
+
 /*///////////////////////////////////
 //
 // Section 2: User Created Ids
@@ -228,8 +316,9 @@ button
 
 #wrapper
 {
-	width: 80%;
-	background-color: #161616;
+	margin: 0 auto;
+	width: 90%;
+	background-color: #333333;
 	min-width: 960px;
 	box-shadow: 5px 5px 5px #101010;
 }
@@ -242,6 +331,7 @@ button
 	padding-bottom: 20px;
 	background-color: #FFFFFF;
 	margin-left: 190px;
+	overflow: auto;  /* Counters the floating divs we have for the modules  */
 }
 
 #content ul
@@ -262,10 +352,13 @@ button
 
 #calendar
 {
-	border: 5px solid #191919;
+	margin: 0 auto;
+	width: 90%;
+	border: 2.5px solid #191919;
+	padding: 2px;
 	border-radius: 10px;
 	width: 100%;
-	height: 600px;	
+	min-height: 600px;	
 }
 
 #subButton
