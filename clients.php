@@ -53,30 +53,26 @@ require_once "dbconnect.php";
             <li>
                 <a href = "clients.php">Client Management</a>
             </li>
-			
-			<?php
-				if ($_SESSION["permissions"] == "Owner")
-					print "
-				<li>
-					<a href = \"employees.php\">Employee Management</a>
-				</li>";
-			?>
-				
-			<li>
-				<a href = "clients.php">Client Management</a>
-			</li>
-			
-			<li>
-				<a href = "employee.php">Employee Management</a>
-			</li>
-			
-			<li>
-				<a href = "calendar.php">View Calendar</a>
-			</li>
-			
-			<li>
-				<a href = "stats.php">Company Statistics</a>
-			</li>
+
+            <li>
+                <a href = "updateSelf.php">My Profile</a>
+            </li>
+
+            <?php
+            if ($_SESSION["permissions"] == "Owner")
+                print "
+					<li>
+						<a href = \"employees.php\">Employee Management</a>
+					</li>";
+            ?>
+
+            <li>
+                <a href = "calendar.php">View Calendar</a>
+            </li>
+
+            <li>
+                <a href = "stats.php">Company Statistics</a>
+            </li>
 
             <li>
                 <a href = "index.php">Sign Out</a>

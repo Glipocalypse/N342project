@@ -60,7 +60,11 @@
 				<li>
 					<a href = "clients.php">Client Management</a>
 				</li>
-				
+
+				<li>
+					<a href = "updateSelf.php">My Profile</a>
+				</li>
+
 				<?php
 					if ($_SESSION["permissions"] == "Owner")
 						print "
@@ -105,7 +109,7 @@
 				</a>
 				
 				
-				<a href = "Client.php" class = "greenModule">
+				<a href = "clients.php" class = "greenModule">
 					<img src = "clients.png" alt = "image failed to load" height = "70" width = "70">
 					<h5>Manage All Clients</h5>
 				</a>
@@ -120,13 +124,15 @@
 					<img src = "calendar.png" alt = "image failed to load" height = "70" width = "70">
 					<h5>View Calendar</h5>
 				</a>
-			
-				
-				<a href = "employee.php" class = "greenModule">
-					<img src = "employee.png" alt = "image failed to load" height = "70" width = "70">
+
+				<?php
+				if ($_SESSION["permissions"] == "Owner")
+					print "<a href = 'employees.php' class = 'greenModule'>
+					<img src = 'employee.png' alt = 'image failed to load' height = '70' width = '70'>
 					<h5>Manage Employees</h5>
-				</a>
-				
+					</a>";
+				?>
+
 				<a href = "index.php" class = "greenModule">
 					<img src = "signout.png" alt = "image failed to load" height = "70" width = "70">
 					<h5>Log out</h5>

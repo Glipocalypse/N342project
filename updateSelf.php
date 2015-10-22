@@ -2,19 +2,17 @@
 session_start();
 require_once "util/function.php";
 require_once "dbconnect.php";
-$employeeNum = $_GET["empNum"];
 
 if(!isset($_SESSION['username'])) {
     header("Location: index.php");
 }
 
-$sql = "SELECT `Permissions` FROM `Aegis_Employee` WHERE `Email` = '" . $_SESSION['username'] . "'";
+$sql = "SELECT `Employee#` FROM `Aegis_Employee` WHERE `Email` = '" . $_SESSION['username'] . "'";
 $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
 
 while ($row = $result->fetch_assoc())
 {
-    if($row["Permissions"] != "Owner")
-        header("Location: dashboard.php");
+    $employeeNum = $row["Employee#"];
 }
 ?>
 <!DOCTYPE html>
@@ -125,15 +123,8 @@ while ($row = $result->fetch_assoc())
                 $sql = "UPDATE `Aegis_Employee` SET `FirstName`='".$newfn."',`LastName`='".$newln."',`JobTitle`='".$newjT."',`Password`='".$newpass."',`Email`='".$newEmail."',`Permissions`='".$newPermissions."' WHERE `Employee#` ='" . $employeeNum . "'";
                 $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
 
-                Header("Location: employees.php"); //where we go after we get this working
+                Header("Location: dashboard.php"); //where we go after we get this working
             }
-        }
-        else if(isset($_POST['deleteBtn']))
-        {
-            $sql = "DELETE FROM `Aegis_Employee` WHERE `Employee#` = '" . $employeeNum . "'";
-            $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
-
-            Header("Location: employees.php"); //where we go after we get this working
         }
         ?>
 
@@ -144,15 +135,15 @@ while ($row = $result->fetch_assoc())
             $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
             $row = $result->fetch_array(MYSQLI_ASSOC)
             ?>
-            <h3>Update Employee</h3>
+            <h3>Update Profile</h3>
             <h3>All required fields marked with asterisk (*)</h3>
 
             <label for = "fn">*First Name:</label>
-            <input name = "fn" id = "fn" value = <?php echo "'". $row["FirstName"] . "'" ?>>
+            <input name = "fn" id = "fn" readonly value = <?php echo "'". $row["FirstName"] . "'" ?>>
             <br/>
 
             <label for = "ln">*Last Name: </label>
-            <input name = "ln" id = "ln" value = <?php echo "'". $row["LastName"] . "'" ?>>
+            <input name = "ln" id = "ln" readonly value = <?php echo "'". $row["LastName"] . "'" ?>>
             <br/>
 
             <label for = "jobTitle">Job Title:</label>
@@ -169,18 +160,15 @@ while ($row = $result->fetch_assoc())
 
             <label for = "permission">*Permissions:</label>
             <select name = "permission">
-                <option <?php  if("Owner" == $row["Permissions"]){echo "selected='selected' ";}?> value = "Owner">Owner</option>
-                <option <?php  if("Employee" == $row["Permissions"]){echo "selected='selected' ";}?> value = "Employee">Employee</option>
+                <?php  if("Owner" == $row["Permissions"]){echo "<option selected='selected' value = 'Owner'>Owner</option>";}?>
+                <?php  if("Employee" == $row["Permissions"]){echo "<option selected='selected' value = 'Employee'>Employee</option>";}?>
             </select>
             <br/><br>
 
             <!--Submit Button-->
             <div id = "subButton">
-                <input name = "SubButton" type = "submit" value = "Update Employee">
+                <input name = "SubButton" type = "submit" value = "Update Profile">
             </div>
-
-            <h3>If Employee is to be deleted from records, click the button below</h3>
-            <input name = "deleteBtn" type = "submit" value = "Delete Employee">
 
         </form>
 

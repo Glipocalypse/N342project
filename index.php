@@ -76,29 +76,50 @@
 					
 					if($_SESSION["count"] < 3) //allows us to prevent action
 					{
-                        //check if the username and password exists in the database
-                        $sql = "select Permissions, count(*) as c from Aegis_Employee where email = '" . $userNameIn. "' and password = '".$pwdIn."'";
+                        $userNameIn = mysqli_real_escape_string($con,$userNameIn);
+                        $pwdIn = mysqli_real_escape_string($con,$pwdIn);
 
-                        $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
-                        $count = 0;
-                        $field = mysqli_fetch_object($result); //the query results are objects, in this case, one object
-                        $count = $field->c;
+                        //now veriy the username and password
+                        if (emailcheck($userNameIn)) //if the email is not a valid format, don't need to continue at all
+                        {
+                            $count = 0;
+                            //check if the username and password exists in the database
+                            $sql = "Call SP_COUNT_Aegis_Employee('".$userNameIn."', '".$pwdIn."',@count);select @count as c";
+                            if (mysqli_multi_query($con,$sql))
+                            {
+                                do
+                                {
+                                    // Store first result set
+                                    if ($result=mysqli_store_result($con))
+                                    {
+                                        // Fetch one and one row
+                                        while ($row=mysqli_fetch_row($result))
+                                        {
+                                            $count= $row[0];  //the second result is the count. It overwrites the first $count value.
+                                        }
+                                        // Free result set
+                                        mysqli_free_result($result);
+                                    }
+                                }
+                                while (mysqli_next_result($con));
+                            }
+                            if ($count == 1) {
+                                $_SESSION['username'] = $userNameIn;
+                                $_SESSION["count"] = 0; //resets the counter
 
-                        if($count != 0)
-						{
-				    		$_SESSION['username'] = $userNameIn;
-							$_SESSION["count"] = 0; //resets the counter
-							$_SESSION["permissions"] = $field->Permissions;
-							print "Login Successful!";
-							Header("Location: dashboard.php"); //where we go after we get this working
-						}
-						
-						else
-						{
-							
-							$mess = $mess . "The information entered is incorrect.";
-							$mess = $mess . "You have used up " . $_SESSION["count"] . "/3 tries.";
-						}
+                                $sql = "select Permissions from Aegis_Employee where email = '" . $userNameIn. "' and password = '".$pwdIn."'";
+                                $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
+                                $field = mysqli_fetch_object($result); //the query results are objects, in this case, one object
+
+                                $_SESSION["permissions"] = $field->Permissions;
+                                print "Login Successful!";
+                                Header("Location: dashboard.php"); //where we go after we get this working
+                            } else {
+
+                                $mess = $mess . "The information entered is incorrect.";
+                                $mess = $mess . "You have used up " . $_SESSION["count"] . "/3 tries.";
+                            }
+                        }
 					}
 					
 					else

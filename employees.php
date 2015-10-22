@@ -3,9 +3,19 @@ session_start();
 
 require_once "util/function.php";
 require_once "dbconnect.php";
-    if(!isset($_SESSION['username'])) {
-		header("Location: index.php");
-    }
+
+if(!isset($_SESSION['username'])) {
+    header("Location: index.php");
+}
+
+$sql = "SELECT `Permissions` FROM `Aegis_Employee` WHERE `Email` = '" . $_SESSION['username'] . "'";
+$result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
+
+while ($row = $result->fetch_assoc())
+{
+    if($row["Permissions"] != "Owner")
+        header("Location: dashboard.php");
+}
 ?>
 <!DOCTYPE html>
 
@@ -29,7 +39,7 @@ require_once "dbconnect.php";
     <!-- This will house all the needed CSS and JavaScript -->
     <link rel = "stylesheet" type = "text/css" href = "proto.css">
 
-    <title>Aegis Appraisals Database:: Clients Management Page</title>
+    <title>Aegis Appraisals Database:: Employee Management Page</title>
 </head>
 
 <body>
@@ -53,26 +63,22 @@ require_once "dbconnect.php";
             <li>
                 <a href = "clients.php">Client Management</a>
             </li>
-			
-			<?php
-				if ($_SESSION["permissions"] == "Owner")
-					print "
-				<li>
-					<a href = \"employees.php\">Employee Management</a>
-				</li>";
-			?>
-				
-			<li>
-				<a href = "clients.php">Client Management</a>
-			</li>
-			
-			<li>
-				<a href = "employee.php">Employee Management</a>
-			</li>
-			
-			<li>
-				<a href = "calendar.php">View Calendar</a>
-			</li>
+
+            <li>
+                <a href = "updateSelf.php">My Profile</a>
+            </li>
+
+            <?php
+            if ($_SESSION["permissions"] == "Owner")
+                print "
+					<li>
+						<a href = \"employees.php\">Employee Management</a>
+					</li>";
+            ?>
+
+            <li>
+                <a href = "calendar.php">View Calendar</a>
+            </li>
 			
 			<li>
 				<a href = "stats.php">Company Statistics</a>
@@ -86,6 +92,26 @@ require_once "dbconnect.php";
 
     <div id = "content">
 
+        <h2>Manage Employee</h2>
+			
+			<div id = "modulePanel">
+				<a href = "addEmployee.php" class = "greenModule">
+					<img src = "addEmployee.png" alt = "image failed to load" height = "70" width = "70">
+					<h5>Add new Employee</h5>
+				</a>
+			</div>
+			
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<hr/>
+		
+		<h3>Active Employee List</h3>
         <table>
             <tr>
                 <th>
@@ -97,15 +123,11 @@ require_once "dbconnect.php";
                 </th>
 
                 <th>
-                    Email
-                </th>
-
-                <th>
-                    Password
-                </th>
-
-                <th>
                     Job Title
+                </th>
+
+                <th>
+                    Email
                 </th>
 
                 <th>
@@ -114,17 +136,16 @@ require_once "dbconnect.php";
             </tr>
 
             <?php
-            $sql = "SELECT `Employee#`, `FirstName`, `LastName`, `Email`, `Password`, `JobTitle`, `Permissions` FROM `Aegis_Employee`";
+            $sql = "SELECT `Employee#`, `FirstName`, `LastName`, `JobTitle`, `Email`, `Permissions` FROM `Aegis_Employee`";
             $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
 
             while ($row = $result->fetch_assoc())
             {
                 echo"<tr>";
-                    echo "<td>" . "<a href = 'updateEmployee.php?employeeNum=" . $row["Employee#"] . "'>" . $row["Employee#"] . "</td>";
+                    echo "<td>" . "<a href = 'updateEmployee.php?empNum=" . $row["Employee#"] . "'>" . $row["Employee#"] . "</td>";
                     echo "<td>" . $row["FirstName"] . " " . $row["LastName"] ."</td>";
-                    echo "<td>" . $row["Email"] . "</td>";
-                    echo "<td>" . $row["Password"] . "</td>";
                     echo "<td>" . $row["JobTitle"] . "</td>";
+                    echo "<td>" . $row["Email"] . "</td>";
                     echo "<td>" . $row["Permissions"] . "</td>";
                 echo"</tr>";
             }

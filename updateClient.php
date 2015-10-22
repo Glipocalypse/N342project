@@ -53,18 +53,22 @@ $clientNum = $_GET["clientNum"];
             <li>
                 <a href = "clients.php">Client Management</a>
             </li>
-			
-			<?php
-				if ($_SESSION["permissions"] == "Owner")
-					print "
-				<li>
-					<a href = \"employees.php\">Employee Management</a>
-				</li>";
-			?>
-			
-			<li>
-				<a href = "calendar.php">View Calendar</a>
-			</li>
+
+            <li>
+                <a href = "updateSelf.php">My Profile</a>
+            </li>
+
+            <?php
+            if ($_SESSION["permissions"] == "Owner")
+                print "
+					<li>
+						<a href = \"employees.php\">Employee Management</a>
+					</li>";
+            ?>
+
+            <li>
+                <a href = "calendar.php">View Calendar</a>
+            </li>
 			
 			<li>
 				<a href = "stats.php">Company Statistics</a>
@@ -155,62 +159,18 @@ $clientNum = $_GET["clientNum"];
                 $sql = "UPDATE `Aegis_Client` SET `FirstName`='".$newFname."',`LastName`='".$newLname."',`EandO`='".$newEO."',`CompanyPhone`='".$newCPhone."',`ContactPerson`='".$newCperson."',`ContactPhone`='".$newCPhone."',`Email`='".$newEmail."',`WebsiteURL`='".$newWebsite."',`Notes`='".$newNotes."',`CompanyUsername`='".$newCUsername."',`CompanyPassword`='".$newCPassword."' WHERE `Client#` ='" . $clientNum . "'";
                 $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
 
-                //add our elements to the the respective arrays
-                //initialize variables
-                $index = 0;
-                //fname first
-                $index = count($_SESSION['Fname']); // should give us the next available index to use
-                $_SESSION['Fname'][$index] = $newFname;
-
-                //lname
-                $index = count($_SESSION['Lname']); // should give us the next available index to use
-                $_SESSION['Lname'][$index] = $newLname;
-
-                //EO
-                $index = count($_SESSION['EO']); // should give us the next available index to use
-                $_SESSION['EO'][$index] = $newEO;
-
-                //email
-                $index = count($_SESSION['email']); // should give us the next available index to use
-                $_SESSION['email'][$index] = $newEmail;
-
-
-                //phone
-                $index = count($_SESSION['phone']); // should give us the next available index to use
-                $_SESSION['phone'][$index] = $newPhone;
-
-                //Contact Person
-                $index = count($_SESSION['contact']); // should give us the next available index to use
-                $_SESSION['contact'][$index] = $newCperson;
-
-                //Contact's Phone
-                $index = count($_SESSION['cPhone']); // should give us the next available index to use
-                $_SESSION['cPhone'][$index] = $newCPhone;
-
-                //Website
-                $index = count($_SESSION['website']); // should give us the next available index to use
-                $_SESSION['website'][$index] = $newWebsite;
-
-                //Notes
-                $index = count($_SESSION['notes']); // should give us the next available index to use
-                $_SESSION['notes'][$index] = $newNotes;
-
-                //Company Username
-                $index = count($_SESSION['cUsername']); // should give us the next available index to use
-                $_SESSION['cUsername'][$index] = $newCUsername;
-
-                //Company Password
-                $index = count($_SESSION['cPassword']); // should give us the next available index to use
-                $_SESSION['cPassword'][$index] = $newCPassword;
+                Header("Location: clients.php"); //where we go after we get this working
             }
 
         }
+        else if(isset($_POST['deleteBtn']))
+        {
+            $sql = "DELETE FROM `Aegis_Client` WHERE `Client#` = '" . $clientNum . "'";
+            $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
+
+            Header("Location: clients.php"); //where we go after we get this working
+        }
         ?>
-		<form method = "post" action = "deleteClient.php"><!--Edit the url here-->
-			<h3>If Client is to be deleted from records, click the button below</h3>
-			<input type = "submit" value = "Delete Client">
-		</form>
-		
 		
         <form method = "post" action = "">
             <?php
@@ -275,6 +235,8 @@ $clientNum = $_GET["clientNum"];
                 <input name = "SubButton" type = "submit" value = "Update Client">
             </div>
 
+            <h3>If Client is to be deleted from records, click the button below</h3>
+            <input name = "deleteBtn" type = "submit" value = "Delete Client">
         </form>
 
         <hr/>

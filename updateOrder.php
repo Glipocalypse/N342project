@@ -30,7 +30,7 @@
 	<!-- This will house all the needed CSS and JavaScript -->
 	<link rel = "stylesheet" type = "text/css" href = "proto.css">
 	
-	<title>Aegis Appraisals Database:: Orders Management Page</title>	
+	<title>Aegis Appraisals Database:: Orders Management Page</title>
 </head>
 
 <body>
@@ -50,18 +50,26 @@
 				<li>
 					<a href = "orders.php">Orders/Appraisals</a>
 				</li>
-				
-				<li>
-					<a href = "clients.php">Client Management</a>
-				</li>
-				
-				<li>
-					<a href = "employee.php">Employee Management</a>
-				</li>
-				
-				<li>
-					<a href = "calendar.php">View Calendar</a>
-				</li>
+
+                <li>
+                    <a href = "clients.php">Client Management</a>
+                </li>
+
+                <li>
+                    <a href = "updateSelf.php">My Profile</a>
+                </li>
+
+                <?php
+                if ($_SESSION["permissions"] == "Owner")
+                    print "
+					<li>
+						<a href = \"employees.php\">Employee Management</a>
+					</li>";
+                ?>
+
+                <li>
+                    <a href = "calendar.php">View Calendar</a>
+                </li>
 				
 				<li>
 					<a href = "stats.php">Company Statistics</a>
@@ -162,14 +170,16 @@
                 }
 
             }
+            else if(isset($_POST['deleteBtn']))
+            {
+                $sql = "DELETE FROM `Aegis_Order` WHERE `InternalOrder#` = '" . $intOrd . "'";
+                $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
+
+                Header("Location: orders.php"); //where we go after we get this working
+            }
 
             $error = "<h3>" . $error . "</h3>";
 			?>
-			
-			<form method = "post" action = "deleteOrder.php"><!--Edit the url here-->
-				<h3>If Order is to be deleted from records, click the button below</h3>
-				<input type = "submit" value = "Delete Order">
-			</form>
 			
 			<form method = "post" action = "">
 			
@@ -307,7 +317,10 @@
 				<div id = "subButton">
 					<input name = "SubButton" type = "submit" value = "Update Event">
 				</div>
-				
+
+                <h3>If Order is to be deleted from records, click the button below</h3>
+                <input name = "deleteBtn" type = "submit" value = "Delete Order">
+
 			</form>
 			
 		</div>

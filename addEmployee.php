@@ -4,14 +4,27 @@
 	require_once "util/function.php";
     require_once "dbconnect.php";
 
+    if(!isset($_SESSION['username'])) {
+        header("Location: index.php");
+    }
+
+    $sql = "SELECT `Permissions` FROM `Aegis_Employee` WHERE `Email` = '" . $_SESSION['username'] . "'";
+    $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
+
+    while ($row = $result->fetch_assoc())
+    {
+        if($row["Permissions"] != "Owner")
+            header("Location: dashboard.php");
+    }
+
 ?>
 <!DOCTYPE html>
 
 <!--
-    Filename: addorders.html
-    Written by: Chris Antolin 
-    Purpose: Orders Prototype for Aegis Appraisals
-    Date Created: 9/27/15
+    Filename: addEmployee.php
+    Written by: Denver Huynh
+    Purpose: Add Employee Prototype for Aegis Appraisals
+    Date Created: 10/22/15
     Modification History: NA
     Last Modified: 
 	
@@ -27,7 +40,7 @@
 	<!-- This will house all the needed CSS and JavaScript -->
 	<link rel = "stylesheet" type = "text/css" href = "proto.css">
 	
-	<title>Aegis Appraisals Database:: Orders Management Page</title>	
+	<title>Aegis Appraisals Database:: Employee Management Page</title>
 </head>
 
 <body>
@@ -47,18 +60,26 @@
 				<li>
 					<a href = "orders.php">Orders/Appraisals</a>
 				</li>
-				
-				<li>
-					<a href = "clients.php">Client Management</a>
-				</li>
-				
-				<li>
-					<a href = "employee.php">Employee Management</a>
-				</li>
-				
-				<li>
-					<a href = "calendar.php">View Calendar</a>
-				</li>
+
+                <li>
+                    <a href = "clients.php">Client Management</a>
+                </li>
+
+                <li>
+                    <a href = "updateSelf.php">My Profile</a>
+                </li>
+
+                <?php
+                if ($_SESSION["permissions"] == "Owner")
+                    print "
+					<li>
+						<a href = \"employees.php\">Employee Management</a>
+					</li>";
+                ?>
+
+                <li>
+                    <a href = "calendar.php">View Calendar</a>
+                </li>
 				
 				<li>
 					<a href = "stats.php">Company Statistics</a>
@@ -70,11 +91,8 @@
 			</ul>
 		</nav>
 		
-		<div id = "content">	
-			
-			<h2>Add new Client</h2>
 		<div id = "content">			
-			<h2>Add new Order</h2>
+			<h2>Add new Employee</h2>
 			
 			<?php
 				$error = "";
@@ -82,118 +100,76 @@
 				//check if the form is made
 				if(isset($_POST['SubButton']))
 				{
-			
+					//set up our booleans for the items 
+					$requiredCheck = false;
 					
-					//set up our variables
-					$newFname = "";
-					$newLname = "";
-					$newJobTitle = "";
-					$newPassword = "";
-					$newEmail = "";
-					$newPermissions = "";
-
-
-					//set up our booleans for the items
-					$emailcheck = false;
-					$namescheck = false;
-
-					$newFname = trim($_POST['myFname']);
-					$newLname = trim($_POST['myLname']);
-					$newJobTitle = $_POST['JobTitle'];
-					$newPassword = trim($_POST['myPass']);
-					$newEmail = trim(filter_input(INPUT_POST, 'myEmail'));
-					$newPermissions = trim($_POST['myPerm']);
-
+					$newfn = trim($_POST['fn']);
+					$newln = trim($_POST['ln']);
+					$newjT = trim($_POST['jobTitle']);
+					$newpass = trim($_POST['pass']);
+					$newEmail = trim($_POST['email']);
+					$newPermissions = trim($_POST['permission']);
+					
+					
 					//check for empty first name/company name
-					if(emptyTest($newFname))
+					if(emptyTest($newfn) && emptyTest($newln) && emptyTest($newpass) && emptyTest($newEmail) && emptyTest($newPermissions))
 					{
-						$namescheck = true;
+						$requiredCheck = true;
 					}
 					else
 					{
-						$error = $error . "First Name Required!";
+						$error = $error . "Check your required fields!";
 					}
-
-					//check email
-					if(emailCheck($newEmail))
+					
+					if($requiredCheck)
 					{
-						$emailcheck = true;
-					}
-
-					else
-					{
-						$error = $error . "Invalid Email.";
-					}
-
-					if($emailcheck == true && $namescheck == true)
-					{
-                        //insert into database
-                        $sql = "INSERT INTO Aegis_Employee (FirstName, LastName, JobTitle, Password, Email, Permissions) VALUES('".$newFname."','".$newLname."','".$newJobTitle."','".$newPassword."','".$newEmail."','".$newPermissions."')";
-
+                        //insert employee into database
+                        $sql = "INSERT INTO Aegis_Employee (FirstName, LastName, JobTitle, Password, Email, Permissions) VALUES('".$newfn."','".$newln."','".$newjT."','".$newpass."','".$newEmail."','".$newPermissions."')";
                         $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
 
-                        //add our elements to the the respective arrays
-						//initialize variables
-						$index = 0;
-						//fname first
-						$index = count($_SESSION['Fname']); // should give us the next available index to use
-						$_SESSION['Fname'][$index] = $newFname;
-						
-						//lname
-						$index = count($_SESSION['Lname']); // should give us the next available index to use
-						$_SESSION['Lname'][$index] = $newLname;
-
-                        //JobTitle
-						$index = count($_SESSION['JobTitle']); // should give us the next available index to use
-						$_SESSION['JobTitle'][$index] = $newJobTitle;
-						
-						//password
-						$index = count($_SESSION['password']); // should give us the next available index to use
-						$_SESSION['password'][$index] = $newPassword;
-
-						//email
-						$index = count($_SESSION['email']); // should give us the next available index to use
-						$_SESSION['email'][$index] = $newEmail;
-
-						//permissions
-						$index = count($_SESSION['perm']); // should give us the next available index to use
-						$_SESSION['perm'][$index] = $newPermissions;
+						Header("Location: employees.php"); //where we go after we get this working
 					}
 					
 				}
+				
+				$error = "<h3>" . $error . "</h3>";
 			?>
 			
-			<form method = "post" action = "addEmployee.php">
+			<form method = "post" action = "">
 				<?php
 					print $error;
-				?>			
-				<h3>New Employee</h3>	
+				?>	
+			
 				<h3>All required fields marked with asterisk (*)</h3>
 				
-				<label for = "myFname">*First Name:</label>
-				<input name = "myFname" id = "myFname">
+				<label for = "fn">*First Name:</label>
+				<input name = "fn" id = "fn">
 				<br/>
 				
-				<label for = "myLname">Last Name: </label>
-				<input name = "myLname" id = "myLname">
-				<br/>
-
-				<label for = "JobTitle">Job Title: </label>
-				<input name = "JobTitle" id = "JobTitle" value = <?php echo "'". $row["JobTitle"] . "'" ?>>
-				<br/>
-
-				<label for = "myPass">*Password:</label>
-				<input name = "myPass" id = "myPass" value = <?php echo "'". $row["Password"] . "'" ?>>
-				<br/>
-
-				<label for = "myEmail">*Email:</label>
-				<input name = "myEmail" type = "email" id = "myEmail"  value = <?php echo "'". $row["Email"] . "'" ?>>
-				<br/>
-
-				<label for = "myPerm">Permissions:</label>
-				<input name = "myPerm" id = "myPerm"  value = <?php echo "'". $row["Permissions"] . "'" ?>>
+				<label for = "ln">*Last Name: </label>
+				<input name = "ln" id = "ln">
 				<br/>
 				
+				<label for = "jobTitle">Job Title:</label>
+				<input name = "jobTitle" id = "jobTitle" >
+				<br/>
+				
+				<label for = "pass">*Password:</label>
+				<input name = "pass" id = "pass" type = "password">
+				<br/>
+				
+				<label for = "email">*Email:</label>
+				<input name = "email" id = "email">
+				<br/>
+
+				<label for = "permission">*Permissions:</label>
+				<select name = "permission">
+					<option value = "" selected = "selected"></option>
+					<option value = "Owner">Owner</option>
+					<option value = "Employee">Employee</option>
+				</select>
+                <br/><br>
+
 				<!--Submit Button-->
 				<div id = "subButton">
 					<input name = "SubButton" type = "submit" value = "Add Employee">

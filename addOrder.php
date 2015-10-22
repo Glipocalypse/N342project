@@ -3,9 +3,6 @@
 
 	require_once "util/function.php";
     require_once "dbconnect.php";
-    if(!isset($_SESSION['username'])) {
-		header("Location: index.php");
-    }
 
 ?>
 <!DOCTYPE html>
@@ -50,15 +47,23 @@
 				<li>
 					<a href = "orders.php">Orders/Appraisals</a>
 				</li>
-				
+
 				<li>
 					<a href = "clients.php">Client Management</a>
 				</li>
-				
+
 				<li>
-					<a href = "employee.php">Employee Management</a>
+					<a href = "updateSelf.php">My Profile</a>
 				</li>
-				
+
+				<?php
+				if ($_SESSION["permissions"] == "Owner")
+					print "
+					<li>
+						<a href = \"employees.php\">Employee Management</a>
+					</li>";
+				?>
+
 				<li>
 					<a href = "calendar.php">View Calendar</a>
 				</li>
