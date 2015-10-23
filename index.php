@@ -137,7 +137,7 @@
 					print $mess;
 				?>
 				<label>UserName:</label>
-				<input name = "myUname" id = "myUname" value = "sfrankeny@gmail.com">
+				<input name = "myUname" id = "myUname" value = "jfrankeny@gmail.com">
 				<br/>
 				
 				<label>Password:</label>
