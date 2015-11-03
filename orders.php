@@ -30,7 +30,7 @@
 	<!-- This will house all the needed CSS and JavaScript -->
 	<link rel = "stylesheet" type = "text/css" href = "proto.css">
 	
-	<title>Aegis Appraisals Database:: Orders Management Page</title>	
+	<title>Aegis Appraisals Database:: Orders Management Page</title>
 </head>
 
 <body>
@@ -111,23 +111,23 @@
 					<th>
 						Order Number
 					</th>
-					
+
 					<th>
 						Address
 					</th>
-					
+
 					<th>
 						Due Date
 					</th>
-					
+
 					<th>
 						Borrower Name
 					</th>
-					
+
 					<th>
 						Client
 					</th>
-					
+
 					<th>
 						Inspection Date
 					</th>

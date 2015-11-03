@@ -167,7 +167,6 @@
 				//check if the form is made
 				if(isset($_POST['SubButton']))
 				{
-			
 					
 					//set up our variables
 					$newFname = "";

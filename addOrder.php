@@ -230,12 +230,15 @@
 				<br/>
 				
 				<label>*Order Type:</label>
+				<?php
+					$sql = "SELECT `TypeName` FROM `Aegis_OrderType`";
+					$result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
+				?>
 				<select name = "orderType">
 					<option value = "" selected = "selected"></option>
-					<option value = "Type A">Type A</option>
-					<option value = "Type B">Type B</option>
-					<option value = "Type C">Type C</option>
-					<option value = "Type D">Type D</option>					
+					<?php while ($row = $result->fetch_assoc()) {?>
+						<option value="<?php echo $row["TypeName"]; ?>"><?php echo $row["TypeName"]; ?></option>
+					<?php } ?>
 				</select>
 				<br/>
 				
