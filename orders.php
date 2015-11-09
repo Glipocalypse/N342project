@@ -27,9 +27,27 @@
 <head>
 
 	<meta  charset="utf-8" />
-	<!-- This will house all the needed CSS and JavaScript -->
-	<link rel = "stylesheet" type = "text/css" href = "proto.css">
-	
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="DataTables-1.10.10/media/css/jquery.dataTables.css">
+
+    <!-- jQuery -->
+    <script type="text/javascript" charset="utf8" src="DataTables-1.10.10/media/js/jquery.js"></script>
+
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="DataTables-1.10.10/media/js/jquery.dataTables.js"></script>
+
+    <script type="text/javascript" language="javascript" class="init">
+        $(document).ready( function () {
+            $('#info').DataTable( {
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+            });
+        } );
+    </script>
+
+    <!-- This will house all the needed CSS and JavaScript -->
+    <link rel = "stylesheet" type = "text/css" href = "proto.css">
+
 	<title>Aegis Appraisals Database:: Orders Management Page</title>
 </head>
 
@@ -42,11 +60,11 @@
 		<!-- Navbar here-->
 		<nav>
 			<ul>
-				
+
 				<li>
 					<a href = "dashboard.php">Dashboard</a>
 				</li>
-				
+
 				<li>
 					<a href = "orders.php">Orders/Appraisals</a>
 				</li>
@@ -70,28 +88,28 @@
 				<li>
 					<a href = "calendar.php">View Calendar</a>
 				</li>
-				
+
 				<li>
 					<a href = "stats.php">Company Statistics</a>
 				</li>
-				
+
 				<li>
 					<a href = "index.php">Sign Out</a>
 				</li>
 			</ul>
 		</nav>
-		
+
 		<div id = "content">
 			<h4>Events for the Month</h4>
 			<h2>Manage Orders</h2>
-			
+
 			<div id = "modulePanel">
 				<a href = "addOrder.php" class = "greenModule">
 					<img src = "addOrders.png" alt = "image failed to load" height = "70" width = "70">
 					<h5>Add new Order</h5>
 				</a>
 			</div>
-			
+
 			<br/>
 			<br/>
 			<br/>
@@ -101,12 +119,13 @@
 			<br/>
 			<br/>
 			<br/>
-			
+
 			<hr/>
-			
-			<h2>Active Orders</h2>	
-			
-			<table>
+
+			<h2>Active Orders</h2>
+
+			<table id="info" class="display">
+                <thead>
 				<tr>
 					<th>
 						Order Number
@@ -140,7 +159,9 @@
 						Status
 					</th>
 				</tr>
+                </thead>
 
+                <tbody>
 				<?php
 				$sql = "SELECT `InternalOrder#`, `ClientOrder#`, `Loan#`, `FHAVA#`, `OrderType`, `AddressID`, `DateAccepted`, `DateDue`, `BorrowerName`, `Notes`, `Client#`, `Fee`, `InspectionDate`, `InspectionTime`, `Employee#`, `StatusID` FROM `Aegis_Order`";
 				$result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
@@ -178,13 +199,13 @@
 					echo"</tr>";
 				}
 				?>
-				
+                </tbody>
 			</table>
-			
+
 			<hr/>
-			
+
 		</div>
-		
+
 				<!-- Footer here -->
 		<footer>
 			Copyright &copy; 2015 Aegis Appraisals Inc.
