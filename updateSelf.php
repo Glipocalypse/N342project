@@ -139,11 +139,11 @@ while ($row = $result->fetch_assoc())
             <h3>All required fields marked with asterisk (*)</h3>
 
             <label for = "fn">*First Name:</label>
-            <input name = "fn" id = "fn" readonly value = <?php echo "'". $row["FirstName"] . "'" ?>>
+            <input name = "fn" id = "fn" value = <?php echo "'". $row["FirstName"] . "'" ?>>
             <br/>
 
             <label for = "ln">*Last Name: </label>
-            <input name = "ln" id = "ln" readonly value = <?php echo "'". $row["LastName"] . "'" ?>>
+            <input name = "ln" id = "ln" value = <?php echo "'". $row["LastName"] . "'" ?>>
             <br/>
 
             <label for = "jobTitle">Job Title:</label>
