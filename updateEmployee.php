@@ -122,7 +122,7 @@ while ($row = $result->fetch_assoc())
             if($requiredCheck)
             {
                 //update employee in database
-                $sql = "UPDATE `Aegis_Employee` SET `FirstName`='".$newfn."',`LastName`='".$newln."',`JobTitle`='".$newjT."',`Password`='".$newpass."',`Email`='".$newEmail."',`Permissions`='".$newPermissions."' WHERE `Employee#` ='" . $employeeNum . "'";
+                $sql = "UPDATE `Aegis_Employee` SET `FirstName`='".$newfn."',`LastName`='".$newln."',`JobTitle`='".$newjT."',`Password`='".sha1($newpass)."',`Email`='".$newEmail."',`Permissions`='".$newPermissions."' WHERE `Employee#` ='" . $employeeNum . "'";
                 $result = mysqli_query($con, $sql) or die("Error in the consult.." . mysqli_error($con)); //send the query to the database or quit if cannot connect
 
                 Header("Location: employees.php"); //where we go after we get this working
@@ -160,7 +160,7 @@ while ($row = $result->fetch_assoc())
             <br/>
 
             <label for = "pass">*Password:</label>
-            <input name = "pass" id = "pass" type = "password" value = <?php echo "'". $row["Password"] . "'" ?>>
+            <input name = "pass" id = "pass" type = "password">
             <br/>
 
             <label for = "email">*Email:</label>

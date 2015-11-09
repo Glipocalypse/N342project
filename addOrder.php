@@ -4,6 +4,11 @@
 	require_once "util/function.php";
     require_once "dbconnect.php";
 
+	if(!isset($_SESSION['username'])) {
+		header("Location: index.php");
+	}
+
+
 ?>
 <!DOCTYPE html>
 

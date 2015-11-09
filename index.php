@@ -72,7 +72,7 @@
 					}
 					
 					$userNameIn = trim($_POST['myUname']);
-					$pwdIn = trim($_POST['myPass']);
+					$pwdIn = sha1(trim($_POST['myPass']));
 					
 					if($_SESSION["count"] < 3) //allows us to prevent action
 					{
@@ -137,17 +137,19 @@
 					print $mess;
 				?>
 				<label>UserName:</label>
-				<input name = "myUname" id = "myUname" value = "sfrankeny@gmail.com">
+				<input name = "myUname" id = "myUname" value = "">
 				<br/>
 				
 				<label>Password:</label>
-				<input name = "myPass" id = "myPass" type = "password" value = "Aegis">
+				<input name = "myPass" id = "myPass" type = "password" value = "">
 				<br/>
 				
 				<input type = "submit" value = "Login" style = "margin-left: 60px;" name = "SubButton">
+
+				<br><br>
+				<a href="forgotPassword.php">Forgot your password?</a>
+				<br><br>
 			</form>
-			
-			
 			
 		</div>
 		
