@@ -10,9 +10,8 @@
     <description>
         Aegis Appraisals Office Management Application
     </description>
-	<icon src="AegisAppIcon.png" />
-	<gap:splash src="logo38251.png" />
-    <content src="index.php"/>
+	<icon src="AegisAppIcon.png"/>
+	<gap:splash src="logo38251.png"/>
 	<gap:platform name="ios"/>
 	<gap:platform name="android" />
 
